@@ -1,4 +1,4 @@
-// index.js - VERSIÓN FINAL con Circuit Breaker + Google Drive + Keycloak ✅
+// index.js - VERSIÓN TEMPORAL PARA AUTORIZACIÓN EN RENDER
 
 const express = require('express');
 const cors = require('cors');
@@ -70,7 +70,15 @@ const protectedAuthorize = new Opossum(authorize, circuitBreakerOptions);
 //                      INICIO DEL SERVIDOR
 // =================================================================
 async function startServer() {
-  const authClient = await protectedAuthorize.fire();
+  // =========================================================
+  //      EL ÚNICO CAMBIO ESTÁ AQUÍ
+  // =========================================================
+  
+  // const authClient = await protectedAuthorize.fire(); // <-- LÍNEA DESACTIVADA TEMPORALMENTE
+  const authClient = await authorize(); // <-- USAMOS ESTA LLAMADA DIRECTA POR AHORA
+  
+  // =========================================================
+
   console.log("🔐 Autorización de Google Drive completada.");
 
   const app = express();
@@ -147,7 +155,7 @@ async function startServer() {
         const file = files[fieldName][0];
         const fileMetadata = { name: file.originalname, parents: [studentFolderId] };
         const media = { mimeType: file.mimetype, body: fs.createReadStream(file.path) };
-        uploadPromises.push(driveService.files.create({ resource: fileMetadata, media, fields: 'id' }));
+        uploadPromises.push(driveService.files.create({ resource: fileMetadata, media: media, fields: 'id' }));
       }
 
       await Promise.all(uploadPromises);
