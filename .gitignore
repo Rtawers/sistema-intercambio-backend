@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+
+# Archivos de la subida temporal de Multer
+uploads/
+
+# Archivo de token de Google (¡MUY IMPORTANTE NO SUBIR ESTO!)
+token.json
+
+# Archivos de credenciales (¡MUY IMPORTANTE NO SUBIR ESTO!)
+oauth_credentials.json
+credentials.json
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
