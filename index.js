@@ -13,7 +13,7 @@ const Opossum = require('opossum'); // <-- 1. IMPORTAMOS OPOSSUM
 
 // --- CONFIGURACIÓN DE GOOGLE DRIVE ---
 const TOKEN_PATH = 'token.json';
-const CREDENTIALS_PATH = path.join(__dirname, 'oauth_credentials.json');
+const CREDENTIALS_PATH = process.env.RENDER ? '/etc/secrets/oauth_credentials.json' : path.join(__dirname, 'oauth_credentials.json');
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
 const PARENT_FOLDER_ID = '1MDkQRh6quSH_z9qmnxo_dQCb-1rI1sPm';
 
